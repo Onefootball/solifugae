@@ -10,7 +10,7 @@
     "concurrentConnections": 3,
     "defaultPriority": 0.5,
     "defaultFreq": "daily",
-    "saveFrequency": 20,
+    "saveFrequency": 300,
     "allowedFolders": ["/de", "/fr",  "/en", "/es"],
     "stripUrlParams": true,
     "folderDepth": 2,
