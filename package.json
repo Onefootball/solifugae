@@ -1,0 +1,28 @@
+{
+  "name": "solifugae",
+  "version": "1.0.0",
+  "description": "NodeJs based web spider for building sitemap (XML)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SinisaG/solifugae.git"
+  },
+  "keywords": [
+    "nodejs",
+    "spider",
+    "crawler",
+    "sitemap"
+  ],
+  "author": "Sinisa Grubor <sinisa.grubor@onefootball.com> (https://www.onefootball.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SinisaG/solifugae/issues"
+  },
+  "homepage": "https://github.com/SinisaG/solifugae#readme",
+  "dependencies": {
+    "simplecrawler": "0.6.2"
+  }
+}
