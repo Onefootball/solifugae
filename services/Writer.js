@@ -118,13 +118,19 @@ var Writer = function (fileName) {
         if (!exists) {
             var l = path.split('/');
             var p = '';
+            if (nodePath.isAbsolute(path)) {
+                p = '/';
+            }
             for (var i = 0; i < l.length; i++) {
                 if (l [i] !== '') {
                     p += l [i];
                     try {
                         fs.mkdirSync(p);
                     } catch (e) {
-                        console.log(e);
+                        if (e.code === 'EACCES') {
+                            console.log("ERROR: Check output path permissions!");
+                            process.exit(1);
+                        }
                     }
                     p += '/';
                 }

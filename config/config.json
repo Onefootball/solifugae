@@ -1,6 +1,6 @@
 {
-  "sitemapLocation" : "sitemaps/",
-  "indexSitemap": "sitemaps/sitemap.xml",
+  "sitemapLocation" : "/arena/home/sites/onefootball.com/dist/sitemaps/",
+  "indexSitemap": "/arena/home/sites/onefootball.com/dist/sitemap.xml",
   "crawler": {
     "entryDomain": "www.onefootball.com",
     "entryPath": "/en",
