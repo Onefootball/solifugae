@@ -9,6 +9,7 @@ var useCloud = CONFIG.s3.use;
 
 prepareTargetFolder (CONFIG.partialSitemapsPath);
 prepareTargetFolder (CONFIG.indexSitemapPath);
+prepareTargetFolder (nodePath.dirname(CONFIG.crawler.queue));
 
 if (useCloud) {
     var syncManager = new SyncManager();
