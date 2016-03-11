@@ -19,9 +19,9 @@ var Spider = function () {
     //object to keep track of all writers
     var _writers = {};
     var _prefixFolder = spiderConfig.prefixFolder;
+
     //inherit from
     events.EventEmitter.call(_self);
-
     /**
      * Full config: https://github.com/cgiffard/node-simplecrawler
      * Initial crawler configuration
@@ -116,7 +116,7 @@ var Spider = function () {
      * Public methods
      */
     _self.run = function () {
-        _crawler.queue.defrost("queue.json");
+        _crawler.queue.defrost(spiderConfig.queue);
         _crawler.start();
     };
 
@@ -163,7 +163,7 @@ var Spider = function () {
      */
     _self._saveProgress = function () {
         console.log('Saving data....');
-        _crawler.queue.freeze("queue.json", function () {
+        _crawler.queue.freeze(spiderConfig.queue, function () {
             console.log('Queue saved');
             for (var key in _writers) {
                 if (_writers.hasOwnProperty(key)) {
@@ -176,6 +176,7 @@ var Spider = function () {
             console.log("Average request latency is %dms.", _crawler.queue.avg("requestLatency"));
             console.log("Average download time is %dms.", _crawler.queue.avg("downloadTime"));
             console.log("The average resource size received is %d bytes.", _crawler.queue.avg("actualDataSize"));
+            _self.emit('ProgressSaved');
         });
     };
 };

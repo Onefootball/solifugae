@@ -1,16 +1,25 @@
 {
-  "sitemapLocation" : "/arena/home/sites/onefootball.com/dist/sitemaps/",
-  "indexSitemap": "/arena/home/sites/onefootball.com/dist/sitemap.xml",
+  "partialSitemapsPath" : "/arena/solifugae_data/sitemaps/",
+  "indexSitemapPath": "/arena/solifugae_data/",
+  "indexSitemapName": "sitemap.xml",
+  "s3": {
+    "use": true,
+    "bucket": "onefootball-solifugae",
+    "partialSitemapsPath": "sitemaps/",
+    "indexSitemapPath": "",
+    "queue": "data/queue.json"
+  },
   "crawler": {
     "entryDomain": "www.onefootball.com",
     "entryPath": "/en",
+    "queue": "/arena/solifugae_data/queue.json",
     "entryProtocol": "https",
     "prefixFolder": "pub",
     "fetchInterval": 1000,
     "concurrentConnections": 3,
     "defaultPriority": 0.5,
     "defaultFreq": "daily",
-    "saveFrequency": 300,
+    "saveFrequency": 10,
     "allowedFolders": ["/de", "/fr",  "/en", "/es"],
     "stripUrlParams": true,
     "folderDepth": 2,

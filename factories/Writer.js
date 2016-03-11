@@ -1,6 +1,5 @@
 var fs = require('fs');
 var CONFIG = require('../config/config');
-var nodePath = require('path');
 
 var Writer = function (fileName) {
 
@@ -8,15 +7,14 @@ var Writer = function (fileName) {
      * Initial config
      */
     var _fileName = fileName;
-    var _location = CONFIG.sitemapLocation;
-    var _indexSitemap = CONFIG.indexSitemap;
+    var _location = CONFIG.partialSitemapsPath;
+    var _indexSitemap = CONFIG.indexSitemapPath + CONFIG.indexSitemapName;
     var _sitemapName = _fileName + '.xml';
     var _sitemapPath = _location + _sitemapName;
     var _defaultPriority = CONFIG.crawler.defaultPriority;
     var _defaultFreq = CONFIG.crawler.defaultFreq;
     var _currentBuffer = '';
-    _prepareTargetFolder (_location);
-    _prepareTargetFolder (nodePath.parse(_indexSitemap).dir);
+
     var _head = _getHead(_sitemapPath);
 
     /**
@@ -28,13 +26,7 @@ var Writer = function (fileName) {
      */
     this.addEntry = function (data) {
         var url = data.url;
-        var freq = data.freq || _defaultFreq;
-        var priority = data.priority || _defaultPriority;
-        var template = fs.readFileSync('./templates/sitemapEntry', 'utf8');
-        var entry = template
-            .replace(':location', url)
-            .replace(':freq', freq)
-            .replace(':priority', priority);
+        var entry = getSitemapEntry (url, data.freq, data.priority);
         _currentBuffer += entry + '\n';
     };
 
@@ -81,20 +73,22 @@ var Writer = function (fileName) {
         var location = _indexSitemap;
         var domain = CONFIG.crawler.entryProtocol + '://' + CONFIG.crawler.entryDomain;
         var sitemaps = fs.readdirSync(_location);
-        //we add root domain in main sitemap file
-        sitemaps.push ('');
+        var partialPath = CONFIG.s3.use ? CONFIG.s3.partialSitemapsPath : _location;
         var maps = '';
         for (var i = 0; i < sitemaps.length; i++) {
             if (sitemaps[i] !== _indexSitemap) {
-                var url = domain + '/' + sitemaps[i];
-                var template = fs.readFileSync('./templates/sitemapEntry', 'utf8');
-                var entry = template
-                    .replace(':location', url)
-                    .replace(':freq', _defaultFreq)
-                    .replace(':priority', _defaultPriority);
+                var url = domain + '/' +  partialPath + sitemaps[i];
+                var entry = getSitemapEntry(url);
                 maps += entry + '\n';
             }
         }
+        //enter route domain
+        var root = domain + '/';
+        if (CONFIG.crawler.prefixFolder) {
+            root += CONFIG.crawler.prefixFolder + '/';
+        }
+        var rootEntry = getSitemapEntry(root);
+        maps += rootEntry + '\n';
         var content = fs.readFileSync('./templates/sitemapSkeleton', 'utf8');
         maps += '</urlset>';
         content = content.replace('</urlset>', maps);
@@ -102,42 +96,17 @@ var Writer = function (fileName) {
         console.log("Main sitemap updated!");
     }
 
-
     /**
-     * Make sure folders we write to exist
-     * @param path
+     * Get sitemap entry
      */
-    function _prepareTargetFolder (path) {
-        var exists = true;
-        try {
-            fs.accessSync(path, fs.F_OK);
-        } catch (e) {
-            exists = false;
-            console.log(path + " does not exist. Creating...");
-        }
-        if (!exists) {
-            var l = path.split('/');
-            var p = '';
-            if (nodePath.isAbsolute(path)) {
-                p = '/';
-            }
-            for (var i = 0; i < l.length; i++) {
-                if (l [i] !== '') {
-                    p += l [i];
-                    try {
-                        fs.mkdirSync(p);
-                    } catch (e) {
-                        if (e.code === 'EACCES') {
-                            console.log("ERROR: Check output path permissions!");
-                            process.exit(1);
-                        }
-                    }
-                    p += '/';
-                }
-            }
-            console.log(path + " successfully created");
-        }
+    function getSitemapEntry(url, freq, priority) {
+        var template = fs.readFileSync('./templates/sitemapEntry', 'utf8');
+        return  template
+            .replace(':location', url)
+            .replace(':freq', freq || _defaultFreq)
+            .replace(':priority', priority || _defaultPriority);
     }
+
 };
 
 module.exports = Writer;
