@@ -23,6 +23,7 @@
     "allowedFolders": ["/de", "/fr",  "/en", "/es"],
     "stripUrlParams": true,
     "folderDepth": 2,
-    "timeToWait": 3600000
+    "timeToWait": 3600000,
+    "maxFileSize": 5
   }
 }
