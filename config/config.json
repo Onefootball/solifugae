@@ -19,10 +19,11 @@
     "concurrentConnections": 3,
     "defaultPriority": 0.5,
     "defaultFreq": "daily",
-    "saveFrequency": 10,
+    "saveFrequency": 1000,
     "allowedFolders": ["/de", "/fr",  "/en", "/es"],
     "stripUrlParams": true,
     "folderDepth": 2,
-    "timeToWait": 3600000
+    "timeToWait": 3600000,
+    "maxFileSize": 5
   }
 }
