@@ -48,7 +48,8 @@ var S3 = function (bucket) {
         var uploadParams = {
             Key: params.key,
             Body: params.body,
-            ACL: 'public-read'
+            ACL: 'public-read',
+            ContentType: 'application/xml'
         };
         _s3bucket.putObject(uploadParams, function (err, data) {
             if (err) {
