@@ -11,7 +11,7 @@
   },
   "crawler": {
     "entryDomain": "www.onefootball.com",
-    "entryPath": "/en",
+    "entryPath": "/",
     "queue": "/arena/solifugae_data/queue.json",
     "entryProtocol": "https",
     "prefixFolder": "pub",
