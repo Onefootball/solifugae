@@ -1,5 +1,5 @@
 {
-  "partialSitemapsPath" : "/arena/solifugae_data/sitemaps/",
+  "partialSitemapsPath": "/arena/solifugae_data/sitemaps/",
   "indexSitemapPath": "/arena/solifugae_data/",
   "indexSitemapName": "sitemap.xml",
   "s3": {
@@ -14,15 +14,28 @@
     "entryPath": "/",
     "queue": "/arena/solifugae_data/queue.json",
     "entryProtocol": "https",
-    "prefixFolder": "pub",
+    "prefixFolder": false,
     "fetchInterval": 1000,
     "concurrentConnections": 3,
     "defaultPriority": 0.5,
     "defaultFreq": "daily",
     "saveFrequency": 1000,
-    "allowedFolders": ["/de", "/fr",  "/en", "/es"],
+    "allowedFolders": [
+      "/ar",
+      "/br",
+      "/cl",
+      "/co",
+      "/de",
+      "/en",
+      "/es",
+      "/fr",
+      "/it",
+      "/mx",
+      "/nl"
+    ],
+    "userAgent": "Solifugae (compatible; Googlebot/2.1;)",
     "stripUrlParams": true,
-    "folderDepth": 2,
+    "folderDepth": 3,
     "timeToWait": 3600000,
     "maxFileSize": 5
   }
