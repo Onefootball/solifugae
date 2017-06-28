@@ -35,6 +35,7 @@ var Spider = function () {
     _crawler.stripQuerystring = spiderConfig.stripUrlParams;
     _crawler.parseScriptTags = false;
     _crawler.parseHTMLComments = false;
+    _crawler.userAgent = spiderConfig.userAgent;
     _crawler.queue = new CustomQueue();
 
     /**
