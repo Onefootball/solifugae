@@ -19,7 +19,7 @@
     "concurrentConnections": 5,
     "defaultPriority": 0.5,
     "defaultFreq": "daily",
-    "saveFrequency": 100,
+    "saveFrequency": 50,
     "allowedFolders": [
       "/ar",
       "/br",
@@ -35,8 +35,8 @@
     ],
     "userAgent": "Solifugae (compatible; Googlebot/2.1;)",
     "stripUrlParams": true,
-    "folderDepth": 3,
-    "timeToWait": 3600000,
+    "folderDepth": 1,
+    "timeToWait": 1000,
     "maxFileSize": 5
   }
 }
