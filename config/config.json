@@ -16,10 +16,10 @@
     "entryProtocol": "https",
     "prefixFolder": false,
     "fetchInterval": 1000,
-    "concurrentConnections": 3,
+    "concurrentConnections": 5,
     "defaultPriority": 0.5,
     "defaultFreq": "daily",
-    "saveFrequency": 1000,
+    "saveFrequency": 100,
     "allowedFolders": [
       "/ar",
       "/br",
